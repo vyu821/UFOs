@@ -30,3 +30,31 @@ function buildTable(data) {
         });
     });
 };
+
+// function that handles the clicking of the filter button
+function handleClick() {
+
+    // look for #datetime id in HTMl tags
+    // get the value from where the date values are stored, save in variable date
+    let date = d3.select('#datetime').property('value');
+
+    // default filter variable
+    let filteredData = tableData;
+
+    // check to see if a date is selected
+    if (date) {
+
+        // filter the default table data to show only the date entered
+        filteredData = filteredData.filter(row => row.datetime == date);
+    };
+
+    // rebuild table using filtered data
+    buildTable(filteredData);
+};
+
+// listens for when the filter button is clicked
+// selects all filter-btn ids and when it is clicked, run the handleClick function
+d3.selectAll('#filter-btn').on('click', handleClick);
+
+// build the table when the page loads
+buildTable(tableData);
