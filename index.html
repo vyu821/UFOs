@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFO Finder</title>
+
+    <!-- link to bootstrap's content delivery network -->
+    <link
+        rel='stylesheet'
+        href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin='anonymous'
+    />
+
+    <!-- link to our stylesheet -->
+    <link rel='stylesheet' href='static/css/style.css'>
+
+</head>
+<body>
+    <!-- wrapper class groups elements and specifies the styling in our stylesheet -->
+    <div class='wrapper'>
+
+        <!-- navigation bar -->
+        <nav class='navbar navbar-expand-lg'>
+
+            <!-- navbar-brand is part of bootstrap, href points to index.html so page will load default table when link is clicked -->
+            <a class='navbar-brand' href='index.html'>UFO Sightings</a>
+        </nav>
+
+        <!-- header -->
+        <div class='jumbotron'>
+            <h1>The Truth Is Out There</h1>
+        </div>
+
+        <!-- article title and paragraph -->
+        <div class='container-fluid'>
+
+            <!-- row class so title and paragraph will align neatly along the page -->
+            <div class='row'>
+
+                <!-- article title -->
+                <div class='col-md-4'>
+                    <h3>UFO Sightings: Fact or Fancy? 
+                        <small>
+                            Ufologists Weigh In
+                        </small>
+                    </h3>
+                </div>
+
+                <!-- paragraphs -->
+                <div class='col-md-8'>
+                    <p>
+                        Are we alone in the universe? For millennia, humans have turned to the sky to answer this question. Now, thanks to research generously funded by W. Avy, a UFO-enthusiast and amateur ufologist, we can supplement our sky-searching with data analysis.
+                    </p>
+                    <p>
+                        "The release of this analysis is well-timed: It coincides with the celebration of World UFO Day, which is a moment for ufologists around the world to connect, relax, and sample a range of UFO-themed snacks," said Dr. Ursula F. Olivier, the world's preeminent expert on circular sightings. "Citizen-scientists can be especially helpful in both cataloguing sightings—which is hugely helpful for us in our search for aliens—and in helping us celebrate the work that has already been done, such as this data visualization project, which will help us raise awareness of the ubiquity of sightings!"
+                    </p>
+                    <p>
+                        Not everyone is ready to celebrate, however. Local CEO and vocal anti-alien activist V. Isualize reached out to our reporters to go on record as firmly opposed to any attempts to provide access to this data. "If there are aliens, they certainly would like to be left alone," she stated, before directing us to the Leave Aliens Alone (LAA) community engagement initiative she founded and funds.
+                    </p>
+                    <p>
+                        So what do YOU think? Are we alone in the universe? Are aliens trying to contact us, or do they want to be left alone? Dig through the data yourself, and let us know what you see.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- table filter -->
+        <div class='container-fluid'>
+            <div class='row'>
+
+                <!-- filters for the table -->
+                <div class='col-md-3'>
+                    
+                    <!-- filter title -->
+                    <form>
+                        <p>Filter Search</p>
+                    </form>
+
+                    <!-- list for the input and button -->
+                    <ul class='list-group'>
+
+                        <!-- list for the date input field -->
+                        <li class='list-group-item'>
+
+                            <!-- label for the input box -->
+                            <label for='date'>Enter Date</label>
+                            <input type='text' placeholder='1/10/2010' id='datetime' />
+                        </li>
+
+                        <!-- button -->
+                        <li class='list-group-item'>
+                            <button id='filter-btn' type='button' class='btn btn-default'>Filter Table</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- table -->
+                <div class='col-md-9'>
+                    <table class='table table-striped'>
+                        <thead>
+                            <tr>
+
+                                <!-- column names based off our data in data.js -->
+                                <th>Date</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Country</th>
+                                <th>Shape</th>
+                                <th>Duration</th>
+                                <th>Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
