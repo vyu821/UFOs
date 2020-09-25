@@ -14,6 +14,7 @@ There are 5 criteria in which you are able to filter the table:
 - State
 - Country
 - Shape
+
 To perform a search, simply type in the search boxes the desired query. Here is what the table would look like if you were to search for the circle shape.
 ![circle_search](/static/images/circle_search_query.png)
 
