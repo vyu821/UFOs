@@ -1,60 +1,87 @@
-// import data from data.js
+// from data.js
 const tableData = data;
 
-// reference the HTML table using d3
-// tell JS what type of element the data will be displayed in
-// look for <tbody> tags in the HTML
-var tbody = d3.select('tbody');
+// get table references
+var tbody = d3.select("tbody");
 
-// function to build table
 function buildTable(data) {
+  // First, clear out any existing data
+  tbody.html("");
 
-    // clear existing data
-    tbody.html('');
+  // Next, loop through each object in the data
+  // and append a row and cells for each value in the row
+  data.forEach((dataRow) => {
+    // Append a row to the table body
+    let row = tbody.append("tr");
 
-    // loop through each object in the data
-    // and append a row and cells for each value in the row
-    data.forEach((dataRow) => {
-        
-        // tells JS to find <tbody> tag in HTML and add a table row <tr>
-        let row = tbody.append('tr');
-
-        // loops through each value in dataRow
-        // and add each value as a table cell <td>
-        Object.values(dataRow).forEach((val) => {
-            
-            // add each value to a cell in the table, table data tag <td>
-            let cell = row.append('td');
-            // extract only the text of the value
-            cell.text(val);
-        });
+    // Loop through each field in the dataRow and add
+    // each value as a table cell (td)
+    Object.values(dataRow).forEach((val) => {
+      let cell = row.append("td");
+      cell.text(val);
     });
+  });
 };
 
-// function that handles the clicking of the filter button
-function handleClick() {
+// 1. Create a variable to keep track of all the filters as an object.
+var filters = {};
 
-    // look for #datetime id in HTMl tags
-    // get the value from where the date values are stored, save in variable date
-    let date = d3.select('#datetime').property('value');
+// 3. Use this function to update the filters. 
+function updateFilters() {
 
-    // default filter variable
-    let filteredData = tableData;
-
-    // check to see if a date is selected
-    if (date) {
-
-        // filter the default table data to show only the date entered
-        filteredData = filteredData.filter(row => row.datetime == date);
+  // 4a. Save the element that was changed as a variable.
+  let changedElement = d3.select(this);
+  // 4b. Save the value that was changed as a variable.
+  let elementValue = changedElement.property('value');
+  // 4c. Save the id of the filter that was changed as a variable.
+  let filteredID = changedElement.attr('id');
+  
+  // 5. If a filter value was entered then add that filterId and value
+  // to the filters list. Otherwise, clear that filter from the filters object.
+  if (elementValue) {
+    filters[filteredID] = elementValue;
+  }
+  else {
+    delete filters[filteredID]
+  }
+  
+  // 6. Call function to apply all filters and rebuild the table
+  filterTable();
+  
+};
+  
+// 7. Use this function to filter the table when data is entered.
+function filterTable() {
+  
+  // 8. Set the filtered data to the tableData.
+  let filteredData = tableData;
+  
+  // 9. Loop through all of the filters and keep any data that
+  // matches the filter values
+  for (var key in filters) {
+    if (key == 'datetime') {
+      filteredData = filteredData.filter(row => row.datetime == filters[key]); 
+    }
+    else if (key == 'city') {
+      filteredData = filteredData.filter(row => row.city == filters[key]); 
+    }
+    else if (key == 'state') {
+      filteredData = filteredData.filter(row => row.state == filters[key]); 
+    }
+    else if (key == 'country') {
+      filteredData = filteredData.filter(row => row.country == filters[key]); 
+    }
+    else if (key == 'shape') {
+      filteredData = filteredData.filter(row => row.shape == filters[key]); 
     };
-
-    // rebuild table using filtered data
-    buildTable(filteredData);
+  };
+  
+  // 10. Finally, rebuild the table using the filtered data
+  buildTable(filteredData);
 };
+  
+// 2. Attach an event to listen for changes to each filter
+d3.selectAll('input').on('change', updateFilters);
 
-// listens for when the filter button is clicked
-// selects all filter-btn ids and when it is clicked, run the handleClick function
-d3.selectAll('#filter-btn').on('click', handleClick);
-
-// build the table when the page loads
+// Build the table when the page loads
 buildTable(tableData);
